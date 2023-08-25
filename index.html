@@ -79,7 +79,7 @@ input[type="number"] {
 }
 </style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="calculator" tags="" position="1386,1537" size="200,200">&lt;!-- 标题和公式说明 --&gt;
 &lt;h1&gt;1999伤害计算器 v2.0&lt;/h1&gt;
-&lt;p&gt; 技能伤害期望= (text-colour:grey)[&#39;&#39;技能倍率&#39;&#39;] x (text-colour:#ff1c8d)[(攻击 - 防御 x (1 - 穿透) x (1 - 减防))] x (text-colour:#119f11)[(1 + (暴击率 - 抗暴率) x (暴击伤害 - 暴击防御 - 1))] x (text-colour:#5a5aed)[(1 + 创伤加成 - 目标创伤减免)] x(text-colour:#9b119b)[ (1 + 增伤率 + 易伤率)] x (text-colour:#bf6a15)[(1 + 术法威力 or 仪式威力)] x (text-colour:#495057)[目标数量]
+&lt;p&gt; 技能伤害期望= (text-colour:grey)[&#39;&#39;技能倍率&#39;&#39;] x (text-colour:#ff1c8d)[(攻击 - 防御 x (1 - 穿透) x (1 - 减防))] x (text-colour:#119f11)[(1 + (暴击率 - 抗暴率) x (暴击伤害 - 暴击防御 - 1))] x (text-colour:#5a5aed)[(1 + 创伤加成 - 目标创伤减免 + 增伤率 + 易伤率)] x (text-colour:#bf6a15)[(1 + 术法威力 or 仪式威力)] x (text-colour:#495057)[目标数量]
 
 **若克制直接用期望乘以1.3 &lt;/p&gt;
 &lt;div class=&quot;container&quot;&gt;
@@ -146,13 +146,11 @@ let target_count = parseFloat(document.getElementById(&quot;target_count&quot;).
         let effective_attack = Math.max(attack_defense_diff, attack * 0.1);
         let effective_crit = Math.min(crit_rate - crit_resistance, 1) * (crit_damage - target_crit_defense-1);
         let damage = skill_rate *  effective_attack * (1+effective_crit) * 
-                     (1 + trauma_bonus - trauma_reduction) * 
-                     (1 + damage_increase + vulnerability) * 
+                     (1 + trauma_bonus - trauma_reduction + damage_increase + vulnerability) * 
                      (1 + powerValue) * target_count;
 					 
-		let crit_result = skill_rate * effective_attack * Math.max(1, (crit_damage - target_crit_defense))*
-                     (1 + trauma_bonus - trauma_reduction) * 
-                     (1 + damage_increase + vulnerability) * 
+	let crit_result = skill_rate * effective_attack * Math.max(1, (crit_damage - target_crit_defense))*
+		     (1 + trauma_bonus - trauma_reduction + damage_increase + vulnerability) *
                      (1 + powerValue) * target_count;
         // 显示结果
         document.getElementById(&quot;result&quot;).innerText = damage.toFixed(1);
