@@ -97,8 +97,9 @@ input[type="number"] {
 </style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="calculator" tags="" position="1386,1537" size="200,200">&lt;!-- 标题和公式说明 --&gt;
 &lt;h1&gt;1999伤害计算器 v2.0&lt;/h1&gt;
 &lt;p&gt; 技能伤害期望= (text-colour:grey)[&#39;&#39;技能倍率&#39;&#39;] x (text-colour:#ff1c8d)[(攻击 - 防御 x (1 - 穿透) x (1 - 减防))] x (text-colour:#119f11)[(1 + (暴击率 - 抗暴率) x (暴击伤害 - 暴击防御 - 1))] x (text-colour:#5a5aed)[(1 + 创伤加成 - 目标创伤减免 + 增伤率 + 易伤率)] x (text-colour:#bf6a15)[(1 + 术法威力 or 仪式威力)] x (text-colour:#495057)[目标数量]
-
-**若克制直接用期望乘以1.3 &lt;/p&gt;
+1.开发此计算器的主要目的是利用伤害期望来辅助评估面板伤害, 帮助选择心相和共鸣块, 因此大多数情况下技能倍率和抗性数据不影响结果
+2.若存在属性克制直接用结果乘以1.3
+3.请根据技能描述区分创伤类倍率, 本源伤害类倍率, 和其他加成类倍率（目前不支持计算非攻击力加成倍率） &lt;/p&gt;
 &lt;div class=&quot;container&quot;&gt;
     &lt;div class=&quot;column&quot;&gt;
         技能倍率 (%): &lt;input type=&quot;number&quot; id=&quot;skill_rate_temp&quot; value=&quot;100&quot;&gt;&lt;br&gt;
